@@ -13,37 +13,44 @@ class Superpixel_L1():
         #print("trying classes")
         spSize = 3
         rowcount = 1
-        columncount = 1
+        columncount = 0
         self.image = px
         superpixelOBJ = []
         superpixelRow = []
-        superX = 1
-        superY = 1
+        superX = 0
+        superY = 0
         pixelcount = 0
     
         i = 0
         while i < square:
 
             j = 0
-            superX = 1
+            superX = 0
             while j < square:
                 x = j + startX
                 y = i + startY
                 pixelcount = pixelcount + 1
-                print(pixelcount)
+                #print(pixelcount)
                 columncount = columncount + 1
                 # store Column info
 
-        
-                superpixelRow.append([superX])
-                superpixelOBJ[superX].append(px[x,y])
-                
+                try:
+                    superpixelRow.insert(superX, px[x,y])
+                    print("SuperX Pixel:" + str(pixelcount) + " - belongs To Superpixel - " + str(superX))
+                except ValueError:
+                    superpixelRow.append(px[x,y])
+                    print("Pixel:" + str(pixelcount) + " - belongs To Superpixel - " + str(superX))
+
+                #superpixelRow.append([superX])
+                #superpixelOBJ[superX].append(px[x,y])
+            
                 
                 if(columncount == spSize):
                     superX = superX + 1
-                    rowcount = 0
+                    columncount = 0
                 
                 j = j + 1
+            print(superpixelRow)
  
             if(rowcount == spSize):
                 
@@ -56,7 +63,7 @@ class Superpixel_L1():
             rowcount = rowcount + 1
             i = i + 1
 
-        print(np.matrix(superpixelOBJ))
+        #print(np.matrix(superpixelOBJ))
 
 
     #def identPeriPixels()

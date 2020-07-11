@@ -16,7 +16,7 @@ def runit():
 }
 
     #y = json.loads(x)
-    print(json.dumps(x["cars"][0]["mpg"]))
+    #print(json.dumps(x["cars"][0]["mpg"]))
 
 #runit()
 prevR = 0
@@ -38,7 +38,7 @@ def setTrend(R, G, B):
   #print("R-Shift : " + str(trendChangeR) + " ; G-Shift : " + str(trendChangeG) + " ; B-Shift : " + str(trendChangeB))
 
   if(trendChangeB > barrier or trendChangeG > barrier or trendChangeR > barrier):
-    print("R-Shift : " + str(trendChangeR) + " ; G-Shift : " + str(trendChangeG) + " ; B-Shift : " + str(trendChangeB))
+    #print("R-Shift : " + str(trendChangeR) + " ; G-Shift : " + str(trendChangeG) + " ; B-Shift : " + str(trendChangeB))
     trendChangeR = 0
     trendChangeG = 0
     trendChangeB = 0
