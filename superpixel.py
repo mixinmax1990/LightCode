@@ -13,10 +13,10 @@ class Superpixel_L1():
         #print("trying classes")
         spSize = 3
         rowcount = 1
-        columncount = 0
+        columncount = 1
         self.image = px
-        superpixelOBJ = []
-        superpixelRow = []
+        superpixelOBJ = {}
+        superpixelRow = {}
         superX = 0
         superY = 0
         pixelcount = 0
@@ -32,14 +32,16 @@ class Superpixel_L1():
                 
                 pixelcount = pixelcount + 1
                 #print(pixelcount)
-                columncount = columncount + 1
+                
                 # store Column info
-
+                datapixel = {'pixel_no': str(pixelcount), 'rgb': str(px[x,y])}
                 try:
-                    superpixelRow.insert(superX, px[x,y])
+                    superpixelRow['' + str(superX) + ''].append(datapixel)
+                    #superpixelRow.insert(superX, px[x,y])
                     #print("SuperX Pixel:" + str(pixelcount) + " - belongs To Superpixel - " + str(superX))
-                except ValueError:
-                    superpixelRow.append(px[x,y])
+                except KeyError:
+                    superpixelRow['' + str(superX) + ''] = []
+                    superpixelRow['' + str(superX) + ''].append(datapixel)
                     #print("Pixel:" + str(pixelcount) + " - belongs To Superpixel - " + str(superX))
 
                 #superpixelRow.append([superX])
@@ -48,15 +50,20 @@ class Superpixel_L1():
                 
                 if(columncount == spSize):
                     superX = superX + 1
-                    columncount = 0
+                    columncount = 1
+                columncount = columncount + 1
                 
                 j = j + 1
-                print("x : " + str(x) + "-  SuperX: " + str(superX))
+                #print("x : " + str(x) + "-  SuperX: " + str(superX))
             #print(superpixelRow)
- 
+            with open('superpixel.json', 'w') as outfile:
+                json.dump(superpixelRow, outfile)
+
             if(rowcount == spSize):
-                superpixelOBJ.append([superY])
-                superpixelOBJ[superY].append(superpixelRow)
+                #superpixelOBJ[superY] = []
+                superpixelOBJ['' + str(superY)].append(superpixelRow)
+                
+                
         
                 superY = superY + 1
                 superpixelRow = []
@@ -64,8 +71,8 @@ class Superpixel_L1():
             rowcount = rowcount + 1
             i = i + 1
 
-        with open('data.json', 'w') as outfile:
-            json.dump(data, outfile)
+        with open('superpixel.json', 'w') as outfile:
+            json.dump(superpixelOBJ, outfile)
 
 
     #def identPeriPixels()

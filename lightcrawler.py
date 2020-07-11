@@ -62,7 +62,7 @@ newimg = Image.new('RGB', (img_size, img_size), color = "red")
 for y in range(img_size): 
 
     print(y)
-# Verical Loop
+    # Verical Loop
     next_y = next_y + 1
     #print(next_x)
 
@@ -79,7 +79,7 @@ for y in range(img_size):
             else:
                 movelist_x = movelist_x + 1
             next_x = 0
-        #   img.putpixel((x,y), new_green)
+        #img.putpixel((x,y), new_green)
         elif(next_y == square):
             if(next_x == 15):
                 count = count + 1
