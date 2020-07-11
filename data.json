@@ -1,0 +1,36 @@
+{
+    "things": [
+        {
+            "website": "stackabuse.com",
+            "from": "Nebraska",
+            "name": "Scott"
+        },
+        {
+            "website": "stackabuse.com",
+            "from": "Nebraska",
+            "name": "Bobbia"
+        }
+    ],
+    "people": [
+        {
+            "website": "stackabuse.com",
+            "from": "Nebraska",
+            "name": "Scott"
+        },
+        {
+            "website": "stackabuse.com",
+            "from": "Nebraska",
+            "name": "Danny"
+        },
+        {
+            "website": "stackabuse.com",
+            "from": "Nebraska",
+            "name": "Danny"
+        },
+        {
+            "website": "stackabuse.com",
+            "from": "Nebraska",
+            "name": "Susan"
+        }
+    ]
+}

@@ -29,6 +29,7 @@ class Superpixel_L1():
             while j < square:
                 x = j + startX
                 y = i + startY
+                
                 pixelcount = pixelcount + 1
                 #print(pixelcount)
                 columncount = columncount + 1
@@ -36,10 +37,10 @@ class Superpixel_L1():
 
                 try:
                     superpixelRow.insert(superX, px[x,y])
-                    print("SuperX Pixel:" + str(pixelcount) + " - belongs To Superpixel - " + str(superX))
+                    #print("SuperX Pixel:" + str(pixelcount) + " - belongs To Superpixel - " + str(superX))
                 except ValueError:
                     superpixelRow.append(px[x,y])
-                    print("Pixel:" + str(pixelcount) + " - belongs To Superpixel - " + str(superX))
+                    #print("Pixel:" + str(pixelcount) + " - belongs To Superpixel - " + str(superX))
 
                 #superpixelRow.append([superX])
                 #superpixelOBJ[superX].append(px[x,y])
@@ -50,10 +51,10 @@ class Superpixel_L1():
                     columncount = 0
                 
                 j = j + 1
-            print(superpixelRow)
+                print("x : " + str(x) + "-  SuperX: " + str(superX))
+            #print(superpixelRow)
  
             if(rowcount == spSize):
-                
                 superpixelOBJ.append([superY])
                 superpixelOBJ[superY].append(superpixelRow)
         
@@ -63,7 +64,8 @@ class Superpixel_L1():
             rowcount = rowcount + 1
             i = i + 1
 
-        #print(np.matrix(superpixelOBJ))
+        with open('data.json', 'w') as outfile:
+            json.dump(data, outfile)
 
 
     #def identPeriPixels()
