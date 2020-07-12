@@ -4,17 +4,23 @@ import trendsetter
 import superpixel
 import PIL 
 from PIL import Image, ImageDraw, ImageFont
+import time
 
-img = Image.open("html/images/face(fem1).jpg", "r")
+
+t0 = time.time()
+img = Image.open("html/images/sunset.jpg", "r")
 width, height = img.size
 square = 50
-startx, starty = 280, 200
+startx, starty = 0, 0
 nested = []
 px = img.load()
 
 
 superpixelL1 = superpixel.Superpixel_L1()
 superpixelL1.identCenterPixelPos(px, square, startx, starty)
+t1 = time.time()
+total = t1-t0
+print(total)
 sys.exit()
 #get store pixel values in list
 #sys.exit()
@@ -86,7 +92,7 @@ for y in range(img_size):
                 R,G,B = nested[movelist_y][movelist_x]
                 brightness = ((R + G + B) / float(3))/2.55
                 #print("count = " + str(count) + " ; R = " + str(R) + " - G = " + str(G) + " - B " + str(B) + " - Bright = " + str(bright))
-                writePixelData(newimg, str(round(brightness, 1)), x, y - 30, brightness)
+                writePixelData(newimg, str(count), x, y - 30, brightness)
 
             newimg.putpixel((x, y), (0,0,0))
         else: 

@@ -2,7 +2,7 @@ import PIL
 from PIL import Image, ImageDraw, ImageFont
 import json
 import numpy as np
-
+import gzip
 
 class Superpixel_L1():
     image = None
@@ -25,6 +25,7 @@ class Superpixel_L1():
         while i < square:
 
             j = 0
+            columncount = 1
             superX = 0
             while j < square:
                 x = j + startX
@@ -34,14 +35,14 @@ class Superpixel_L1():
                 #print(pixelcount)
                 
                 # store Column info
-                datapixel = {'pixel_no': str(pixelcount), 'rgb': str(px[x,y])}
+                datapixel =  str(px[x,y])
                 try:
-                    superpixelRow['' + str(superX) + ''].append(datapixel)
+                    superpixelRow['SuperX' + str(superX) + ''].append(datapixel)
                     #superpixelRow.insert(superX, px[x,y])
                     #print("SuperX Pixel:" + str(pixelcount) + " - belongs To Superpixel - " + str(superX))
                 except KeyError:
-                    superpixelRow['' + str(superX) + ''] = []
-                    superpixelRow['' + str(superX) + ''].append(datapixel)
+                    superpixelRow['SuperX' + str(superX) + ''] = []
+                    superpixelRow['SuperX' + str(superX) + ''].append(datapixel)
                     #print("Pixel:" + str(pixelcount) + " - belongs To Superpixel - " + str(superX))
 
                 #superpixelRow.append([superX])
@@ -50,27 +51,30 @@ class Superpixel_L1():
                 
                 if(columncount == spSize):
                     superX = superX + 1
-                    columncount = 1
+                    columncount = 0
                 columncount = columncount + 1
                 
                 j = j + 1
                 #print("x : " + str(x) + "-  SuperX: " + str(superX))
             #print(superpixelRow)
-            with open('superpixel.json', 'w') as outfile:
-                json.dump(superpixelRow, outfile)
+            #with open('superpixel.json', 'w') as outfile:
+            #    json.dump(superpixelRow, outfile)
 
             if(rowcount == spSize):
                 #superpixelOBJ[superY] = []
-                superpixelOBJ['' + str(superY)].append(superpixelRow)
-                
-                
-        
+                superpixelOBJ['SuperY' + str(superY)] = []
+                superpixelOBJ['SuperY' + str(superY)].append(superpixelRow)
                 superY = superY + 1
-                superpixelRow = []
-                rowcount = 1
+                superpixelRow = {}
+                rowcount = 0
             rowcount = rowcount + 1
             i = i + 1
+        
 
+        #json_str = json.dumps(superpixelOBJ) + "\n"               # 2. string (i.e. JSON)
+        #json_bytes = json_str.encode('utf-8') 
+        #with gzip.GzipFile('ziped.json', 'w') as fout:   # 4. gzip
+        #   fout.write(json_bytes)
         with open('superpixel.json', 'w') as outfile:
             json.dump(superpixelOBJ, outfile)
 
